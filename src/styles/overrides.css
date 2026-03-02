@@ -1,0 +1,4 @@
+/* Override all border-radius values to remove rounded corners */
+* {
+  border-radius: 0 !important;
+}
