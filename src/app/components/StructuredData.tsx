@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+export const faviconUrl =
+  'https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/699e31daeaa5f8bb2610a36a/52864ce5c_event-rules-high-resolution-logo-transparent.png';
+
 export interface StructuredDataProps {
   data: Record<string, any>;
 }
@@ -33,6 +36,7 @@ export const organizationSchema = {
     'Luxury cocktail lounge and event bar service specializing in premium cocktails, event planning, and unforgettable party experiences.',
   url: typeof window !== 'undefined' ? window.location.origin : '',
   logo: typeof window !== 'undefined' ? `${window.location.origin}/logo.png` : '',
+  faviconUrl,
   image:
     'https://images.unsplash.com/photo-1765622656578-a7fcd69ebe43?w=1200&h=630&fit=crop',
   telephone: '+1-555-123-4567',
@@ -319,6 +323,7 @@ export const websiteSchema = {
   name: 'VIP Bar',
   description: 'Luxury cocktail lounge and premium event bar service',
   url: typeof window !== 'undefined' ? window.location.origin : '',
+  faviconUrl,
   potentialAction: {
     '@type': 'SearchAction',
     target: {
