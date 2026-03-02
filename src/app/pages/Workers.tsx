@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router';
 import { StructuredData, breadcrumbSchema } from '../components/StructuredData';
+import RohitImage from '../Image/PHOTO-2026-02-10-00-47-20.jpg';
 
 
 
@@ -24,36 +25,33 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: '1',
-    name: 'Michael Anderson',
+    name: 'George Alsag',
     role: 'Founder & CEO',
     title: 'Visionary Leader',
     image: 'https://images.unsplash.com/photo-1472745942893-3990c9b4d7b4?w=800',
-    bio: 'Michael founded VIP Staffing in 2015 with a vision to revolutionize the event staffing industry. With over 15 years of experience in hospitality management and event coordination, he recognized the need for a premium staffing agency that prioritizes both client satisfaction and worker welfare. Under his leadership, VIP Staffing has grown from a small local operation to one of the most trusted names in event staffing across the region.',
-    email: 'michael@vipstaffing.com',
+    bio: 'George founded VIP Staffing in 2015 with a vision to revolutionize the event staffing industry. With over 7 years of experience in hospitality management and event coordination, he recognized the need for a premium staffing agency that prioritizes both client satisfaction and worker welfare. Under his leadership, VIP Staffing has grown from a small local operation to one of the most trusted names in event staffing across the region.',
+    email: 'george@vipstaffing.com',
     phone: '+1 (555) 123-4567',
-    linkedin: 'https://linkedin.com/in/michaelanderson',
+    linkedin: 'https://linkedin.com/in/georgealsag',
     experience: {
-      years: 15,
-      description: 'Over 15 years of experience in hospitality management, event coordination, and staffing operations. Previously served as Director of Operations at luxury hotels and event venues.'
+      years: 7,
+      description: 'Over 7 years of experience in hospitality management, event coordination, and staffing operations. Previously served as Director of Operations at luxury hotels and event venues.'
     },
-    
-    
-    
   },
 
   {
     id: '2',
-    name: 'Sarah Martinez',
+    name: ' Rohit Joshi',
     role: 'Co-Founder & COO',
     title: 'Operations Specialist',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800',
-    bio: 'Sarah co-founded VIP Staffing alongside Michael, bringing her extensive background in operations management and human resources. With a passion for creating efficient systems and nurturing talent, she oversees all day-to-day operations, staff training, and quality assurance. Her commitment to excellence ensures that every staff member represents the VIP Staffing brand with professionalism and expertise.',
-    email: 'sarah@vipstaffing.com',
+    image: RohitImage,
+    bio: 'Rohit co-founded VIP Staffing alongside George, bringing his extensive background in operations management and human resources. With a passion for creating efficient systems and nurturing talent, he oversees all day-to-day operations, staff training, and quality assurance. His commitment to excellence ensures that every staff member represents the VIP Staffing brand with professionalism and expertise.',
+    email: 'rohit@vipstaffing.com',
     phone: '+1 (555) 123-4568',
-    linkedin: 'https://linkedin.com/in/sarahmartinez',
+    linkedin: 'https://linkedin.com/in/joshi',
     experience: {
-      years: 12,
-      description: '12 years of experience in operations management, human resources, and training development. Previously managed large-scale hospitality operations for Fortune 500 companies.'
+      years: 8,
+      description: '8 years of experience in operations management, human resources, and training development. Previously managed large-scale hospitality operations for Fortune 500 companies.'
     },
   }
 ];
