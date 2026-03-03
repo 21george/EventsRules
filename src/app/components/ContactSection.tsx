@@ -257,25 +257,25 @@ export function ContactSection() {
     {
       icon: <Phone size={20} />,
       title: 'Phone',
-      details: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      details: '+4915563012884',
+      link: 'tel:+4915563012884',
     },
     {
       icon: <Mail size={20} />,
       title: 'Email',
-      details: 'info@EventRuels.com',
-      link: 'mailto:info@EventRuels.com',
+      details: 'info@EventRules.com',
+      link: 'mailto:info@EventRules.com',
     },
     {
       icon: <MapPin size={20} />,
       title: 'Location',
-      details: 'MÜnchen',
+      details: 'München',
       link: 'https://maps.google.com',
     },
   ];
 
   return (
-    <section id="contact" className="bg-black py-16 lg:py-24">
+    <section id="ContactSection" className="bg-black py-16 lg:py-24">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Title */}
         <div className="text-center mb-12 lg:mb-16">
@@ -334,7 +334,16 @@ export function ContactSection() {
             </div>
 
             {/* Service Areas */}
-            
+            <div className="mt-8 p-6 bg-zinc-900/50 border border-[#d4a574]/20 rounded-lg">
+              <h4 className="text-white text-sm mb-4">Service Areas</h4>
+              <p className="text-gray-400 text-sm">We proudly serve the following areas:</p>
+              <ul className="text-gray-400 text-sm list-disc list-inside mt-2">
+                <li>München</li>
+                <li>Berlin</li>
+                <li>Hamburg</li>
+                <li>Frankfurt</li>
+              </ul>
+            </div>
           </div>
 
           {/* Right - Contact Form */}
