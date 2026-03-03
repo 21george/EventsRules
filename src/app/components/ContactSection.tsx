@@ -28,6 +28,7 @@ export function ContactSection() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const eventTypes = [
     { value: '', label: 'Select Event Type' },
@@ -152,6 +153,10 @@ export function ContactSection() {
       [name]: value,
     }));
 
+    if (submitError) {
+      setSubmitError('');
+    }
+
     // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({
@@ -180,10 +185,18 @@ export function ContactSection() {
         serviceInterest: '',
       }));
     }
+
+    if (submitError) {
+      setSubmitError('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (submitError) {
+      setSubmitError('');
+    }
 
     if (validateForm()) {
       setIsSubmitting(true);
@@ -196,35 +209,45 @@ export function ContactSection() {
           body: JSON.stringify(formData),
         });
 
-        if (result.ok) {
-          const resultData = await result.json();
-          
-          // Simulate form submission
-          setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSubmitted(true);
-            
-            // Reset form
-            setFormData({
-              name: '',
-              email: '',
-              phone: '',
-              eventDate: '',
-              guestCount: '',
-              eventType: '',
-              serviceInterest: [],
-              subject: '',
-              message: '',
-            });
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-              setIsSubmitted(false);
-            }, 5000);
-          }, 1000);
+        let resultData: any = null;
+        try {
+          resultData = await result.json();
+        } catch {
+          resultData = null;
         }
+
+        if (!result.ok || !resultData?.success) {
+          setSubmitError(
+            resultData?.error ||
+              `Failed to submit form (status ${result.status}). Please try again.`
+          );
+          setIsSubmitting(false);
+          return;
+        }
+
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          eventDate: '',
+          guestCount: '',
+          eventType: '',
+          serviceInterest: [],
+          subject: '',
+          message: '',
+        });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
       } catch (error) {
         console.error("Error submitting form:", error);
+        setSubmitError("Something went wrong submitting the form. Please try again.");
         setIsSubmitting(false);
       }
     }
@@ -324,6 +347,14 @@ export function ContactSection() {
                   <h4 className="text-white font-medium mb-1">Message Sent Successfully!</h4>
                   <p className="text-green-200 text-sm">We'll get back to you within 24 hours.</p>
                 </div>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {!isSubmitted && submitError && (
+              <div className="absolute top-0 left-0 right-0 bg-zinc-900/80 border border-red-500 rounded-lg p-4 z-10 animate-fade-in">
+                <h4 className="text-white font-medium mb-1">We couldn't send your message</h4>
+                <p className="text-red-500 text-sm">{submitError}</p>
               </div>
             )}
 

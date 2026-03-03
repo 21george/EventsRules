@@ -84,7 +84,7 @@ export function HomeNew() {
             {/* CTA Button */}
             <div className="mt-10">
               <a
-                href="#services"
+                href="#ContactSection"
                 className="inline-block border border-[#C9A84C] text-[#C9A84C] px-8 py-3 text-xs tracking-[0.2em] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 rounded-sm"
               >
               JETZT KOSTENLOSES ANGEBOT ANFRAGEN
@@ -100,24 +100,24 @@ export function HomeNew() {
       <AboutSection />
 
       {/* Services Detail Section */}
-      <section id="services" className="bg-black py-16 lg:py-24">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl text-white mb-4 tracking-wide">
+      <section id="services" className="bg-black py-12 sm:py-16 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4 tracking-wide">
               Our Services
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
               Discover our comprehensive range of luxury bar and event services designed to make your celebration unforgettable
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Service 1: Bar Staff Placement */}
             <Link 
               to="/services/bar-staff-placement"
-              className="group relative overflow-hidden rounded-lg bg-zinc-900 border border-[#d4a574]/20 hover:border-[#d4a574] transition-all duration-300"
+              className="group relative flex h-full flex-col overflow-hidden rounded-lg bg-zinc-900 border border-[#d4a574]/20 hover:border-[#d4a574] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a574] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
-              <div className="relative h-[250px] overflow-hidden">
+              <div className="relative h-48 sm:h-[220px] lg:h-[250px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1698054239930-1a96f42f87da?w=500"
                   alt="Bar Staff Placement"
@@ -126,9 +126,10 @@ export function HomeNew() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
               </div>
               
-              <div className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
-                  <Martini size={24} />
+              <div className="flex flex-1 flex-col p-5 sm:p-6 space-y-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
+                  <Martini size={24} className="hidden sm:block" />
+                  <Martini size={20} className="sm:hidden" />
                 </div>
                 <h3 className="text-xl text-white group-hover:text-[#d4a574] transition-colors">
                   Bar Staff Placement
@@ -136,7 +137,7 @@ export function HomeNew() {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Professional bartenders ready to work at your venue or event
                 </p>
-                <div className="flex items-center text-[#d4a574] text-sm">
+                <div className="mt-auto flex items-center text-[#d4a574] text-sm">
                   <span>Learn More →</span>
                 </div>
               </div>
@@ -145,9 +146,9 @@ export function HomeNew() {
             {/* Service 2: Event Service Staff */}
             <Link 
               to="/services/event-service-staff"
-              className="group relative overflow-hidden rounded-lg bg-zinc-900 border border-[#d4a574]/20 hover:border-[#d4a574] transition-all duration-300"
+              className="group relative flex h-full flex-col overflow-hidden rounded-lg bg-zinc-900 border border-[#d4a574]/20 hover:border-[#d4a574] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4a574] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
-              <div className="relative h-[250px] overflow-hidden">
+              <div className="relative h-48 sm:h-[220px] lg:h-[250px] overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1768508660861-16b3b4272e6f?w=500"
                   alt="Event Service Staff"
@@ -156,9 +157,10 @@ export function HomeNew() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
               </div>
               
-              <div className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
-                  <Users size={24} />
+              <div className="flex flex-1 flex-col p-5 sm:p-6 space-y-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
+                  <Users size={24} className="hidden sm:block" />
+                  <Users size={20} className="sm:hidden" />
                 </div>
                 <h3 className="text-xl text-white group-hover:text-[#d4a574] transition-colors">
                   Event Service Staff
@@ -166,41 +168,14 @@ export function HomeNew() {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Trained service personnel for events, parties, and special occasions
                 </p>
-                <div className="flex items-center text-[#d4a574] text-sm">
+                <div className="mt-auto flex items-center text-[#d4a574] text-sm">
                   <span>Learn More →</span>
                 </div>
               </div>
             </Link>
 
             {/* Service 3: Private Bar Services */}
-            <Link 
-              to="/services/entertainment"
-              className="group relative overflow-hidden rounded-lg bg-zinc-900 border border-[#d4a574]/20 hover:border-[#d4a574] transition-all duration-300"
-            >
-              <div className="relative h-[250px] overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1663668567002-6190b578c308?w=500"
-                  alt="Entertainment"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-              </div>
-              
-              <div className="p-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
-                  <Music size={24} />
-                </div>
-                <h3 className="text-xl text-white group-hover:text-[#d4a574] transition-colors">
-                  Entertainment
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Live DJ services and entertainment to keep guests engaged
-                </p>
-                <div className="flex items-center text-[#d4a574] text-sm">
-                  <span>Learn More →</span>
-                </div>
-              </div>
-            </Link>
+            
 
             {/* Service 4: Club & Concert Staffing */}
            
