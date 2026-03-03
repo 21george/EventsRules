@@ -1,0 +1,36 @@
+# Render Infrastructure-as-Code configuration
+# Docs: https://render.com/docs/infrastructure-as-code
+#
+# Usage:
+#   1. Connect this GitHub repository to Render (render.com → New → Blueprint).
+#   2. Render reads this file and creates the service automatically.
+#   3. Set the required environment variables in the Render dashboard
+#      (or add them as envVarGroups if you use Render's secret groups).
+
+services:
+  - type: web
+    name: eventsrules-api
+    runtime: node
+    rootDir: Api
+    buildCommand: npm ci
+    startCommand: node index.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # PORT is provided automatically by Render — do not override it here.
+      # The following secrets must be set manually in the Render dashboard:
+      - key: MONGODB_URI
+        sync: false
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: EMAIL_TO
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_FROM_NAME
+        sync: false
+      # Comma-separated list of allowed frontend origins, e.g. https://21george.github.io
+      - key: CORS_ORIGIN
+        sync: false

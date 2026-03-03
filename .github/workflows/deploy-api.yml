@@ -1,0 +1,28 @@
+name: Deploy API to Render
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Api/**'
+      - 'render.yaml'
+      - '.github/workflows/deploy-api.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Trigger Render deploy hook
+        # Store your Render deploy hook URL as a repository secret named RENDER_DEPLOY_HOOK_URL.
+        # In Render dashboard: Service → Settings → Deploy Hook → copy the URL.
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" ]; then
+            echo "RENDER_DEPLOY_HOOK_URL secret is not set. Skipping deploy hook."
+            echo "Render will auto-deploy when it detects changes if the repository is connected."
+          else
+            curl -s --fail "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" && echo "Deploy hook triggered successfully." || \
+              (echo "Deploy hook request failed. Check the RENDER_DEPLOY_HOOK_URL secret and Render service status." && exit 1)
+          fi
