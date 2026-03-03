@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 export default function AboutSection() {
   return (
@@ -63,14 +64,7 @@ export default function AboutSection() {
               signature cocktails that perfectly complement your occasion. Whether it's an intimate 
               gathering or a grand celebration, we ensure every detail exceeds your expectations.
             </p>
-            <div className="mt-10">
-              <a
-                href="AboutSection"
-                className="inline-block border border-[#C9A84C] text-[#C9A84C] px-8 py-3 text-xs tracking-[0.2em] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 rounded-sm"
-              >
-                More...
-              </a>
-            </div>
+       
           </div>
         </div>
       </div>

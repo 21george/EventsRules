@@ -273,7 +273,7 @@ export function ServiceDetail() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+1555VIPBARS"
+                href="tel:+41 556301 2884"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#d4a574] text-black rounded-full hover:bg-[#c49564] transition-all duration-300"
               >
                 <Phone size={20} />

@@ -6,6 +6,8 @@ import { ServiceDetail } from './pages/ServiceDetail';
 import { Workers } from './pages/Workers';
 import { Navigation } from './components/Navigation';
 import FooterSection from './components/Footer';
+import { PrivateEventsSection } from './components/PrivateEventsSection';
+
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -47,6 +49,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Workers />
+      </Layout>
+    ),
+  },
+  {
+    path: '/private-events',
+    element: (
+      <Layout>
+        <PrivateEventsSection privateEventImage="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80" />
       </Layout>
     ),
   },

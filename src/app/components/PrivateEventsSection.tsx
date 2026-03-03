@@ -1,135 +1,107 @@
-import { Check } from 'lucide-react';
+import React from "react";
+import { Check } from "lucide-react";
 
-interface PrivateEventsSectionProps {
-  privateEventImage: string;
-}
+const eventTypes = [
+  "Weddings & Receptions",
+  "Corporate Events",
+  "Birthday Celebrations",
+  "Anniversary Parties",
+  "Holiday Gatherings",
+  "Fundraisers & Galas",
+];
 
-export function PrivateEventsSection({ privateEventImage }: PrivateEventsSectionProps) {
-  const packages = [
-    {
-      id: 1,
-      name: 'Bronze',
-      price: '$999',
-      features: [
-        'Up to 25 guests',
-        '3 hours event duration',
-        'Standard cocktail menu',
-        'Professional bartender',
-        'Basic bar setup',
-      ],
-    },
-    {
-      id: 2,
-      name: 'Silver',
-      price: '$1,999',
-      features: [
-        'Up to 50 guests',
-        '4 hours event duration',
-        'Premium cocktail menu',
-        '2 Professional bartenders',
-        'Deluxe bar setup',
-        'Custom drink creation',
-      ],
-      featured: true,
-    },
-    {
-      id: 3,
-      name: 'Gold',
-      price: '$3,999',
-      features: [
-        'Up to 100 guests',
-        '6 hours event duration',
-        'Exclusive cocktail menu',
-        '3 Professional bartenders',
-        'VIP bar setup',
-        'Custom drink creation',
-        'Catering service',
-        'Event coordinator',
-      ],
-    },
-  ];
-
+export default function PrivateEventsSection() {
   return (
-    <section className="bg-zinc-950 py-16 lg:py-24">
-      <div className="container mx-auto px-6 lg:px-12">
-        {/* Section Title */}
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-2xl lg:text-3xl text-white tracking-[0.3em] mb-4">
-            PRIVATE EVENTS
-          </h2>
-          <p className="text-gray-400 text-sm lg:text-base max-w-2xl mx-auto">
-            Book our exclusive VIP service for your private celebration. Choose from our carefully curated packages
-          </p>
-        </div>
+    <section className="bg-[#0a0a0a] py-20 md:py-28 relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#C9A84C]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-        {/* Hero Image */}
-        <div className="relative mb-12 lg:mb-16 overflow-hidden rounded-lg">
-          <img
-            src={privateEventImage}
-            alt="Private VIP event"
-            className="w-full h-64 lg:h-96 object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-black/40 to-transparent"></div>
-        </div>
-
-        {/* Packages */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.id}
-              className={`relative rounded-lg p-6 lg:p-8 ${
-                pkg.featured
-                  ? 'bg-[#d4a574]/10 border-2 border-[#d4a574] scale-105'
-                  : 'bg-zinc-900/50 border border-[#d4a574]/20 hover:border-[#d4a574]'
-              } transition-all duration-300`}
-            >
-              {pkg.featured && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#d4a574] text-black text-xs tracking-wider rounded-full">
-                  MOST POPULAR
-                </div>
-              )}
-
-              <div className="text-center mb-6">
-                <h3 className="text-[#d4a574] text-xl tracking-wider mb-2">
-                  {pkg.name}
-                </h3>
-                <div className="text-white text-3xl lg:text-4xl mb-2">
-                  {pkg.price}
-                </div>
-                <p className="text-gray-400 text-xs">per event</p>
-              </div>
-
-              <ul className="space-y-3 mb-6">
-                {pkg.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-300 text-sm">
-                    <Check size={16} className="text-[#d4a574] flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className={`w-full py-3 rounded-full text-sm tracking-wider transition-all duration-300 ${
-                  pkg.featured
-                    ? 'bg-[#d4a574] text-black hover:bg-[#c49564]'
-                    : 'border border-[#d4a574] text-[#d4a574] hover:bg-[#d4a574] hover:text-black'
-                }`}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Content */}
+          <div>
+            <div className="mb-6">
+              <h2
+                className="text-2xl md:text-3xl text-white tracking-[0.15em] font-light mb-4"
+                style={{ fontFamily: "'Georgia', serif" }}
               >
-                Book Now
-              </button>
+                PRIVATE EVENTS
+              </h2>
+              <div className="w-12 h-[1px] bg-[#C9A84C]" />
             </div>
-          ))}
-        </div>
 
-        {/* Custom Package CTA */}
-        <div className="text-center mt-12 lg:mt-16 p-8 border border-[#d4a574]/20 rounded-lg">
-          <h3 className="text-white text-xl mb-3">Need a Custom Package?</h3>
-          <p className="text-gray-400 text-sm mb-6 max-w-xl mx-auto">
-            Contact us to discuss your specific requirements and we'll create a tailored package for your special event
-          </p>
-          <button className="px-8 py-3 border border-[#d4a574] text-[#d4a574] rounded-full hover:bg-[#d4a574] hover:text-black transition-all duration-300 text-sm tracking-wider">
-            Request Custom Quote
-          </button>
+            <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 font-light">
+              Transform your private events into extraordinary experiences with our bespoke bartending 
+              services. We specialize in creating custom cocktail menus and providing professional service 
+              that elevates any occasion.
+            </p>
+
+            <div className="space-y-4 mb-10">
+              <h3 className="text-white text-lg font-light mb-4">Perfect For:</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {eventTypes.map((type, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-[#C9A84C]/10 border border-[#C9A84C] flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-[#C9A84C]" />
+                    </div>
+                    <span className="text-gray-400 text-sm">{type}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#contact"
+                className="inline-block text-center border border-[#C9A84C] bg-[#C9A84C] text-black px-8 py-3 text-xs tracking-[0.2em] hover:bg-transparent hover:text-[#C9A84C] transition-all duration-500 rounded-sm"
+              >
+                BOOK YOUR EVENT
+              </a>
+              <a
+                href="/gallery"
+                className="inline-block text-center border border-[#C9A84C] text-[#C9A84C] px-8 py-3 text-xs tracking-[0.2em] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 rounded-sm"
+              >
+                VIEW GALLERY
+              </a>
+            </div>
+          </div>
+
+          {/* Right - Image with overlay */}
+          <div className="relative">
+            <div className="relative overflow-hidden rounded-sm">
+              <img
+                src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80"
+                alt="Private event"
+                className="w-full h-[500px] object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating card */}
+            <div className="absolute bottom-8 left-8 right-8 bg-black/90 backdrop-blur-sm border border-[#C9A84C]/30 p-6 rounded-sm">
+              <div className="flex items-center gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full border-2 border-[#C9A84C] flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-[#C9A84C] text-xl font-light">★</div>
+                      <div className="text-[#C9A84C] text-[8px] tracking-[0.15em]">PREMIUM</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-white text-sm font-light mb-1">Customized Packages</h4>
+                  <p className="text-gray-400 text-xs leading-relaxed">
+                    Tailored to your specific needs, guest count, and budget
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative corner */}
+            <div className="absolute -top-4 -right-4 w-20 h-20 border-t-2 border-r-2 border-[#C9A84C]/30 rounded-tr-lg" />
+            <div className="absolute -bottom-4 -left-4 w-20 h-20 border-b-2 border-l-2 border-[#C9A84C]/30 rounded-bl-lg" />
+          </div>
         </div>
       </div>
     </section>

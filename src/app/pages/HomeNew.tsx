@@ -17,6 +17,7 @@ import AboutSection from '../components/AboutSection';
 import TeamSection from '../components/TeamSection';
 import { ContactSection } from '../components/ContactSection';
 import { motion } from "framer-motion";
+import PrivateEventsSection from '../components/PrivateEventsSection';
 
 
 export function HomeNew() {
@@ -201,7 +202,9 @@ export function HomeNew() {
             Learn More →
           </div>
         </div>
-      </Link>
+              </Link>
+              
+
 
     </div>
   </div>
