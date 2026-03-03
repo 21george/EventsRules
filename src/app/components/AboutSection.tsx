@@ -27,7 +27,7 @@ export default function AboutSection() {
               </div>
               <div className="h-48 overflow-hidden rounded-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&q=80"
+                src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80"
                   alt="Bar setup"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
