@@ -1,31 +1,34 @@
-import { defineConfig } from 'vite'
-import path from 'path'
+import { defineConfig, loadEnv } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  resolve: {
-    alias: {
-      // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
+const rootDir = new URL('.', import.meta.url).pathname
 
-  base: "EventRules",
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, rootDir, '')
 
-  server: {
-    proxy: {
-      '/Api': {
-        target: 'http://localhost:5050',
-        changeOrigin: true,
+  return {
+    // For sub-path deployments (e.g. GitHub Pages), set VITE_BASE to something like "/EventsRules/"
+    base: env.VITE_BASE || '/',
+
+    plugins: [react(), tailwindcss()],
+    resolve: {
+      alias: {
+        // Alias @ to the src directory
+        '@': new URL('./src', import.meta.url).pathname,
       },
     },
-  },
 
-  // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
-  assetsInclude: ['**/*.svg', '**/*.csv'],
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:5050',
+          changeOrigin: true,
+        },
+      },
+    },
+
+    // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
+    assetsInclude: ['**/*.svg', '**/*.csv'],
+  }
 })
