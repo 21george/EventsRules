@@ -1,4 +1,5 @@
 import { Martini, Users, Music, UtensilsCrossed } from 'lucide-react';
+import  RohtImage from '../Image/PHOTO-2026-02-10-00-47-20.jpg';
 
 export interface ServiceDetail {
   id: string;
@@ -41,7 +42,7 @@ export const servicesData: ServiceDetail[] = [
     shortDescription: 'Professional bartenders and bar staff ready to work at your venue or event.',
     icon: Martini,
     image: 'https://images.unsplash.com/photo-1698054239930-1a96f42f87da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJ0ZW5kZXIlMjBjb2NrdGFpbCUyMHNlcnZpY2V8ZW58MXx8fHwxNzcyMDI0ODczfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    heroImage: 'https://images.unsplash.com/photo-1758526348716-73f30e8b2232?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiYXJ0ZW5kZXIlMjBjcmFmdGluZyUyMGNvY2t0YWlsJTIwcHJvZmVzc2lvbmFsJTIwYmFyfGVufDF8fHx8MTc3MjAyNjA0Mnww&ixlib=rb-4.1.0&q=80&w=1080',
+    heroImage: RohtImage,
     detailedDescription: 'We provide skilled and experienced bartenders for clubs, concerts, private parties, and events. Our staff members are trained professionals who excel at mixing drinks, providing excellent customer service, and maintaining a professional atmosphere. Whether you need staff for a one-night event or ongoing club operations, we have the right people for your needs.',
     benefits: [
       'Experienced bartenders with 2+ years in the industry',
@@ -361,12 +362,7 @@ export const servicesData: ServiceDetail[] = [
         answer: 'We can coordinate all rentals including tables, chairs, linens, china, and glassware, or work with rentals you\'ve arranged.',
       },
     ],
-    gallery: [
-      'https://images.unsplash.com/photo-1751651054936-db23f5d67160?w=600',
-      'https://images.unsplash.com/photo-1760001553414-5634201efc36?w=600',
-      'https://images.unsplash.com/photo-1769767677849-668341f05f62?w=600',
-      'https://images.unsplash.com/photo-1698054239930-1a96f42f87da?w=600',
-    ],
+    
   },
 ];
 

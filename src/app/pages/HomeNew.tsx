@@ -153,9 +153,7 @@ export function HomeNew() {
         </section>
 
         {/* Team Section */}
-        <div className="flex justify-center items-center flex-col sm:flex-row">
           <TeamSection />
-        </div>
 
         {/* Party Section */}
         <PartyEventsSection />
