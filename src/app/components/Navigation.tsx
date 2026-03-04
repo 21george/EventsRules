@@ -114,13 +114,13 @@ export function Navigation() {
 
       {/* Mobile Navigation */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center justify-between px-8 py-6">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img
               src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/699e31daeaa5f8bb2610a36a/52864ce5c_event-rules-high-resolution-logo-transparent.png"
               alt="Event Rules Logo"
-              className="h-12 w-auto object-contain brightness-0 invert"
+              className="h-16 w-auto object-contain brightness-0 invert"
             />
           </Link>
 
@@ -129,7 +129,7 @@ export function Navigation() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-[#d4a574] p-2"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={34} /> : <Menu size={34} />}
           </button>
         </div>
 
