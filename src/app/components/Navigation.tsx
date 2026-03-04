@@ -8,11 +8,13 @@ export function Navigation() {
 
   const leftNavItems = [
     { label: 'HOME', href: '/' },
-    { label: 'ABOUT', href: '/AboutSection' },
+    //{ label: 'ABOUT', href: '/AboutSection' },
   ];
   
   const rightNavItems = [
-    { label: 'GALLERY', href: '/gallery' },
+    { label: 'ABOUT', href: '/AboutSection' },
+  
+    { label: '', href: '/gallery' },
     // { label: 'BLOG', href: '/blog' },
   ];
 
@@ -129,7 +131,7 @@ export function Navigation() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-[#d4a574] p-2"
           >
-            {mobileMenuOpen ? <X size={34} /> : <Menu size={34} />}
+            {mobileMenuOpen ? <X size={34} /> : <Menu size={24} />}
           </button>
         </div>
 
