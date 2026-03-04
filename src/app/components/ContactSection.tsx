@@ -201,7 +201,7 @@ export function ContactSection() {
     if (validateForm()) {
       setIsSubmitting(true);
       try {
-        const result = await fetch("/api/sendContactForm", {
+        const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/eventinfos`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -263,8 +263,8 @@ export function ContactSection() {
     {
       icon: <Mail size={20} />,
       title: 'Email',
-      details: 'info@EventRules.com',
-      link: 'mailto:info@EventRules.com',
+      details: 'info@eventsrules.com',
+      link: 'mailto:info@eventsrules.com',
     },
     {
       icon: <MapPin size={20} />,
@@ -334,16 +334,7 @@ export function ContactSection() {
             </div>
 
             {/* Service Areas */}
-            <div className="mt-8 p-6 bg-zinc-900/50 border border-[#d4a574]/20 rounded-lg">
-              <h4 className="text-white text-sm mb-4">Service Areas</h4>
-              <p className="text-gray-400 text-sm">We proudly serve the following areas:</p>
-              <ul className="text-gray-400 text-sm list-disc list-inside mt-2">
-                <li>München</li>
-                <li>Berlin</li>
-                <li>Hamburg</li>
-                <li>Frankfurt</li>
-              </ul>
-            </div>
+            
           </div>
 
           {/* Right - Contact Form */}

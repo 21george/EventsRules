@@ -280,7 +280,7 @@ export function ServiceDetail() {
                 Call Us Now
               </a>
               <a
-                href="mailto:info@vipbar.com"
+                href="mailto:info@eventsrules.com"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-[#d4a574] text-[#d4a574] rounded-full hover:bg-[#d4a574] hover:text-black transition-all duration-300"
               >
                 <Mail size={20} />
