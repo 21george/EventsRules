@@ -11,11 +11,13 @@ import {
   Star
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { t } = useTranslation();
 
   // Scroll to top on mount
   useEffect(() => {
@@ -26,9 +28,9 @@ export function ServiceDetail() {
     return (
       <div className="min-h-screen bg-black pt-24 pb-16">
         <div className="container mx-auto px-6 lg:px-12 text-center">
-          <h1 className="text-3xl text-white mb-4">Service Not Found</h1>
+          <h1 className="text-3xl text-white mb-4">{t('serviceDetail.notFound')}</h1>
           <Link to="/" className="text-[#d4a574] hover:underline">
-            Return to Home
+            {t('serviceDetail.returnHome')}
           </Link>
         </div>
       </div>
@@ -40,15 +42,15 @@ export function ServiceDetail() {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    serviceType: service.title,
+    serviceType: t(service.titleKey),
     provider: {
       '@type': 'Organization',
-      name: 'VIP Bar',
+      name: 'Event Rules',
     },
-    description: service.detailedDescription,
+    description: t(service.detailedDescriptionKey),
     areaServed: {
       '@type': 'State',
-      name: 'New York',
+      name: 'Munich',
     },
    
   };
@@ -58,16 +60,16 @@ export function ServiceDetail() {
       
       <StructuredData data={serviceSchema} />
       <StructuredData data={breadcrumbSchema([
-        { name: 'Home', url: '/' },
-        { name: 'Services', url: '/#services' },
-        { name: service.title, url: `/services/${service.slug}` },
+        { name: t('nav.home'), url: '/' },
+        { name: t('nav.services'), url: '/#services' },
+        { name: t(service.titleKey), url: `/services/${service.slug}` },
       ])} />
 
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[500px] overflow-hidden">
         <img
           src={service.heroImage}
-          alt={service.title}
+          alt={t(service.titleKey)}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40"></div>
@@ -79,7 +81,7 @@ export function ServiceDetail() {
               className="inline-flex items-center gap-2 text-[#d4a574] hover:text-white transition-colors mb-6"
             >
               <ArrowLeft size={20} />
-              <span>Back to Home</span>
+              <span>{t('serviceDetail.backToHome')}</span>
             </Link>
             
             <div className="max-w-3xl">
@@ -89,10 +91,10 @@ export function ServiceDetail() {
                 </div>
               </div>
               <h1 className="text-4xl lg:text-5xl text-white mb-4">
-                {service.title}
+                {t(service.titleKey)}
               </h1>
               <p className="text-xl text-gray-300">
-                {service.shortDescription}
+                {t(service.shortDescriptionKey)}
               </p>
             </div>
           </div>
@@ -103,9 +105,9 @@ export function ServiceDetail() {
       <section className="py-16 lg:py-24 bg-black">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl text-white mb-6">About This Service</h2>
+            <h2 className="text-3xl text-white mb-6">{t('serviceDetail.aboutThisService')}</h2>
             <p className="text-gray-300 text-lg leading-relaxed">
-              {service.detailedDescription}
+              {t(service.detailedDescriptionKey)}
             </p>
           </div>
         </div>
@@ -116,16 +118,16 @@ export function ServiceDetail() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl text-white mb-8 text-center">
-              What's Included
+              {t('serviceDetail.whatsIncluded')}
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
-              {service.benefits.map((benefit, index) => (
+              {service.benefitKeys.map((benefitKey, index) => (
                 <div
                   key={index}
                   className="flex items-start gap-3 p-4 rounded-lg bg-black/50 border border-[#d4a574]/10"
                 >
                   <Check className="text-[#d4a574] flex-shrink-0 mt-1" size={20} />
-                  <span className="text-gray-300">{benefit}</span>
+                  <span className="text-gray-300">{t(benefitKey)}</span>
                 </div>
               ))}
             </div>
@@ -138,7 +140,7 @@ export function ServiceDetail() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl text-white mb-12 text-center">
-              Our Process
+              {t('serviceDetail.ourProcess')}
             </h2>
             <div className="space-y-8">
               {service.process.map((step) => (
@@ -149,8 +151,8 @@ export function ServiceDetail() {
                     </div>
                   </div>
                   <div className="flex-1 pt-2">
-                    <h3 className="text-xl text-white mb-2">{step.title}</h3>
-                    <p className="text-gray-400">{step.description}</p>
+                    <h3 className="text-xl text-white mb-2">{t(step.titleKey)}</h3>
+                    <p className="text-gray-400">{t(step.descriptionKey)}</p>
                   </div>
                 </div>
               ))}
@@ -168,41 +170,41 @@ export function ServiceDetail() {
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl text-white mb-12 text-center">
-                Success Story
+                {t('serviceDetail.successStory')}
               </h2>
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <img
                     src={service.caseStudy.image}
-                    alt={service.caseStudy.title}
+                    alt={t(service.caseStudy.titleKey)}
                     className="w-full h-auto rounded-lg"
                   />
                 </div>
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-2xl text-white mb-2">
-                      {service.caseStudy.title}
+                      {t(service.caseStudy.titleKey)}
                     </h3>
-                    <p className="text-[#d4a574]">Client: {service.caseStudy.client}</p>
+                    <p className="text-[#d4a574]">{t('serviceDetail.client')}: {service.caseStudy.client}</p>
                   </div>
                   
                   <div>
-                    <h4 className="text-white font-semibold mb-2">The Challenge</h4>
-                    <p className="text-gray-400">{service.caseStudy.challenge}</p>
+                    <h4 className="text-white font-semibold mb-2">{t('serviceDetail.theChallenge')}</h4>
+                    <p className="text-gray-400">{t(service.caseStudy.challengeKey)}</p>
                   </div>
                   
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Our Solution</h4>
-                    <p className="text-gray-400">{service.caseStudy.solution}</p>
+                    <h4 className="text-white font-semibold mb-2">{t('serviceDetail.ourSolution')}</h4>
+                    <p className="text-gray-400">{t(service.caseStudy.solutionKey)}</p>
                   </div>
                   
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Results</h4>
+                    <h4 className="text-white font-semibold mb-2">{t('serviceDetail.results')}</h4>
                     <ul className="space-y-2">
-                      {service.caseStudy.results.map((result, i) => (
+                      {service.caseStudy.resultKeys.map((resultKey, i) => (
                         <li key={i} className="flex items-start gap-2 text-gray-400">
                           <Star className="text-[#d4a574] flex-shrink-0 mt-0.5" size={16} />
-                          <span>{result}</span>
+                          <span>{t(resultKey)}</span>
                         </li>
                       ))}
                     </ul>
@@ -210,10 +212,10 @@ export function ServiceDetail() {
                   
                   <div className="border-l-4 border-[#d4a574] pl-6 py-4">
                     <p className="text-gray-300 italic mb-2">
-                      {service.caseStudy.testimonial}
+                      {t(service.caseStudy.testimonialKey)}
                     </p>
                     <p className="text-sm text-gray-500">
-                      — {service.caseStudy.clientRole}
+                      — {t(service.caseStudy.clientRoleKey)}
                     </p>
                   </div>
                 </div>
@@ -228,7 +230,7 @@ export function ServiceDetail() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl text-white mb-12 text-center">
-              Frequently Asked Questions
+              {t('serviceDetail.faq')}
             </h2>
             <div className="space-y-4">
               {service.faq.map((item, index) => (
@@ -241,7 +243,7 @@ export function ServiceDetail() {
                     className="w-full flex items-center justify-between p-6 text-left hover:bg-zinc-900/50 transition-colors"
                   >
                     <span className="text-white font-medium pr-4">
-                      {item.question}
+                      {t(item.questionKey)}
                     </span>
                     {openFaq === index ? (
                       <ChevronUp className="text-[#d4a574] flex-shrink-0" size={20} />
@@ -251,7 +253,7 @@ export function ServiceDetail() {
                   </button>
                   {openFaq === index && (
                     <div className="px-6 pb-6 text-gray-400">
-                      {item.answer}
+                      {t(item.answerKey)}
                     </div>
                   )}
                 </div>
@@ -266,10 +268,10 @@ export function ServiceDetail() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl text-white mb-6">
-              Ready to Get Started?
+              {t('serviceDetail.readyToStart')}
             </h2>
             <p className="text-gray-400 mb-8">
-              Contact us today to discuss your event and receive a custom quote for our {service.title.toLowerCase()} service.
+              {t('serviceDetail.contactUsToday', { service: t(service.titleKey).toLowerCase() })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -277,14 +279,14 @@ export function ServiceDetail() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#d4a574] text-black rounded-full hover:bg-[#c49564] transition-all duration-300"
               >
                 <Phone size={20} />
-                Call Us Now
+                {t('serviceDetail.callUsNow')}
               </a>
               <a
                 href="mailto:info@eventsrules.com"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-[#d4a574] text-[#d4a574] rounded-full hover:bg-[#d4a574] hover:text-black transition-all duration-300"
               >
                 <Mail size={20} />
-                Send Email
+                {t('serviceDetail.sendEmail')}
               </a>
             </div>
           </div>

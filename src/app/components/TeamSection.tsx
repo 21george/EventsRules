@@ -1,17 +1,20 @@
 import RohitImage from '../Image/PHOTO-2026-02-10-00-47-20.jpg';
 import GeorgeImage from '../Image/IMG_0807 - Edited.jpg';
+import { useTranslation } from 'react-i18next';
   
   
 export default function TeamSection() {
+  const { t } = useTranslation();
+  
   const teamMembers = [
     {
       name: 'George Alsag',
-      role: 'Head Bartender',
+      roleKey: 'team.headBartender',
       image: GeorgeImage,
     },
     {
       name: 'Rohit Joshi',
-      role: 'Senior Bartender',
+      roleKey: 'team.seniorBartender',
       image: RohitImage,
     },
   ] as const;
@@ -33,7 +36,7 @@ export default function TeamSection() {
                 />
               </div>
               <h3 className="text-white text-xl">{member.name}</h3>
-              <p className="text-gray-500 text-sm">{member.role}</p>
+              <p className="text-gray-500 text-sm">{t(member.roleKey)}</p>
             </div>
           ))}
         </div>

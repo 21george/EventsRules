@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle, Calendar, Users as UsersIcon } from 'lucide-react';
+import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 export function ContactSection() {
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,31 +35,31 @@ export function ContactSection() {
   const [submitError, setSubmitError] = useState('');
 
   const eventTypes = [
-    { value: '', label: 'Select Event Type' },
-    { value: 'wedding', label: 'Wedding Reception' },
-    { value: 'birthday', label: 'Birthday Party' },
-    { value: 'corporate', label: 'Corporate Event' },
-    { value: 'anniversary', label: 'Anniversary' },
-    { value: 'graduation', label: 'Graduation Party' },
-    { value: 'other', label: 'Other' },
+    { value: '', labelKey: 'contact.selectEventType' },
+    { value: 'wedding', labelKey: 'contact.weddingReception' },
+    { value: 'birthday', labelKey: 'contact.birthdayParty' },
+    { value: 'corporate', labelKey: 'contact.corporateEvent' },
+    { value: 'anniversary', labelKey: 'contact.anniversary' },
+    { value: 'graduation', labelKey: 'contact.graduationParty' },
+    { value: 'other', labelKey: 'contact.other' },
   ];
 
   const guestRanges = [
-    { value: '', label: 'Select Guest Count' },
-    { value: '1-25', label: '1-25 guests' },
-    { value: '26-50', label: '26-50 guests' },
-    { value: '51-100', label: '51-100 guests' },
-    { value: '101-200', label: '101-200 guests' },
-    { value: '200+', label: '200+ guests' },
+    { value: '', labelKey: 'contact.selectGuestCount' },
+    { value: '1-25', labelKey: 'contact.guests1_25' },
+    { value: '26-50', labelKey: 'contact.guests26_50' },
+    { value: '51-100', labelKey: 'contact.guests51_100' },
+    { value: '101-200', labelKey: 'contact.guests101_200' },
+    { value: '200+', labelKey: 'contact.guests200plus' },
   ];
 
   const services = [
-    'Cocktail Catering',
-    'Event Planning',
-    'Entertainment/DJ',
-    'Food Catering',
-    'Bar Setup',
-    'Custom Drinks',
+    { value: 'Cocktail Catering', labelKey: 'contact.cocktailCatering' },
+    { value: 'Event Planning', labelKey: 'contact.eventPlanning' },
+    { value: 'Entertainment/DJ', labelKey: 'contact.entertainmentDJ' },
+    { value: 'Food Catering', labelKey: 'contact.foodCatering' },
+    { value: 'Bar Setup', labelKey: 'contact.barSetup' },
+    { value: 'Custom Drinks', labelKey: 'contact.customDrinks' },
   ];
 
   const validateEmail = (email: string) => {
@@ -84,61 +88,61 @@ export function ContactSection() {
     let isValid = true;
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('contact.nameRequired');
       isValid = false;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = t('contact.emailRequired');
       isValid = false;
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = t('contact.emailInvalid');
       isValid = false;
     }
 
     if (formData.phone && !validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
+      newErrors.phone = t('contact.phoneInvalid');
       isValid = false;
     }
 
     if (!formData.eventDate) {
-      newErrors.eventDate = 'Event date is required';
+      newErrors.eventDate = t('contact.eventDateRequired');
       isValid = false;
     } else {
       const selectedDate = new Date(formData.eventDate);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       if (selectedDate < today) {
-        newErrors.eventDate = 'Event date must be in the future';
+        newErrors.eventDate = t('contact.eventDateFuture');
         isValid = false;
       }
     }
 
     if (!formData.guestCount) {
-      newErrors.guestCount = 'Please select expected guest count';
+      newErrors.guestCount = t('contact.guestCountRequired');
       isValid = false;
     }
 
     if (!formData.eventType) {
-      newErrors.eventType = 'Please select an event type';
+      newErrors.eventType = t('contact.eventTypeRequired');
       isValid = false;
     }
 
     if (formData.serviceInterest.length === 0) {
-      newErrors.serviceInterest = 'Please select at least one service';
+      newErrors.serviceInterest = t('contact.serviceRequired');
       isValid = false;
     }
 
     if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
+      newErrors.subject = t('contact.subjectRequired');
       isValid = false;
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('contact.messageRequired');
       isValid = false;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t('contact.messageMinLength');
       isValid = false;
     }
 
@@ -201,22 +205,20 @@ export function ContactSection() {
     if (validateForm()) {
       setIsSubmitting(true);
       try {
-        const result = await fetch(`${import.meta.env.VITE_BACKEND_URL}/eventinfos`, {
-          method: "POST",
+        const result = await axios.post(`${import.meta.env.VITE_API_URL}/eventinfos`, formData, {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
         });
 
         let resultData: any = null;
         try {
-          resultData = await result.json();
+          resultData = result.data;
         } catch {
           resultData = null;
         }
 
-        if (!result.ok || !resultData?.success) {
+        if (!result.status || !resultData?.success) {
           setSubmitError(
             resultData?.error ||
               `Failed to submit form (status ${result.status}). Please try again.`
@@ -256,19 +258,19 @@ export function ContactSection() {
   const contactInfo = [
     {
       icon: <Phone size={20} />,
-      title: 'Phone',
+      titleKey: 'contact.phone',
       details: '+4915563012884',
       link: 'tel:+4915563012884',
     },
     {
       icon: <Mail size={20} />,
-      title: 'Email',
+      titleKey: 'contact.email',
       details: 'info@eventsrules.com',
       link: 'mailto:info@eventsrules.com',
     },
     {
       icon: <MapPin size={20} />,
-      title: 'Location',
+      titleKey: 'contact.location',
       details: 'München',
       link: 'https://maps.google.com',
     },
@@ -280,10 +282,10 @@ export function ContactSection() {
         {/* Section Title */}
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-2xl lg:text-3xl text-white tracking-[0.3em] mb-4">
-            CONTACT US
+            {t('contact.title')}
           </h2>
           <p className="text-gray-400 text-sm lg:text-base max-w-2xl mx-auto">
-            Get in touch with us to discuss your event and make it unforgettable
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -291,9 +293,9 @@ export function ContactSection() {
           {/* Left - Contact Information */}
           <div className="space-y-8">
             <div>
-              <h3 className="text-white text-xl mb-4">Let's Talk</h3>
+              <h3 className="text-white text-xl mb-4">{t('contact.letsTalk')}</h3>
               <p className="text-gray-400 text-sm lg:text-base leading-relaxed mb-8">
-                Whether you're planning an intimate gathering or a grand celebration, our team is here to help bring your vision to life. Reach out to us and let's create something extraordinary together.
+                {t('contact.description')}
               </p>
             </div>
 
@@ -311,7 +313,7 @@ export function ContactSection() {
                     {info.icon}
                   </div>
                   <div>
-                    <h4 className="text-white text-sm mb-1">{info.title}</h4>
+                    <h4 className="text-white text-sm mb-1">{t(info.titleKey)}</h4>
                     <p className="text-gray-400 text-sm group-hover:text-[#d4a574] transition-colors">{info.details}</p>
                   </div>
                 </a>
@@ -320,14 +322,14 @@ export function ContactSection() {
 
             {/* Business Hours */}
             <div className="mt-8 p-6 bg-zinc-900/50 border border-[#d4a574]/20 rounded-lg">
-              <h4 className="text-white text-sm mb-4">Business Hours</h4>
+              <h4 className="text-white text-sm mb-4">{t('contact.businessHours')}</h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-gray-400">
-                  <span>Monday - Friday</span>
+                  <span>{t('contact.mondayFriday')}</span>
                   <span className="text-[#d4a574]">9:00 AM - 11:00 PM</span>
                 </div>
                 <div className="flex justify-between text-gray-400">
-                  <span>Saturday - Sunday</span>
+                  <span>{t('contact.saturdaySunday')}</span>
                   <span className="text-[#d4a574]">10:00 AM - 2:00 AM</span>
                 </div>
               </div>
@@ -344,8 +346,8 @@ export function ContactSection() {
               <div className="absolute top-0 left-0 right-0 bg-green-900/90 border border-green-700 rounded-lg p-4 flex items-center gap-3 z-10 animate-fade-in">
                 <CheckCircle className="text-green-400 flex-shrink-0" size={24} />
                 <div>
-                  <h4 className="text-white font-medium mb-1">Message Sent Successfully!</h4>
-                  <p className="text-green-200 text-sm">We'll get back to you within 24 hours.</p>
+                  <h4 className="text-white font-medium mb-1">{t('contact.messageSentTitle')}</h4>
+                  <p className="text-green-200 text-sm">{t('contact.messageSentDescription')}</p>
                 </div>
               </div>
             )}
@@ -353,7 +355,7 @@ export function ContactSection() {
             {/* Error Message */}
             {!isSubmitted && submitError && (
               <div className="absolute top-0 left-0 right-0 bg-zinc-900/80 border border-red-500 rounded-lg p-4 z-10 animate-fade-in">
-                <h4 className="text-white font-medium mb-1">We couldn't send your message</h4>
+                <h4 className="text-white font-medium mb-1">{t('contact.errorTitle')}</h4>
                 <p className="text-red-500 text-sm">{submitError}</p>
               </div>
             )}
@@ -364,7 +366,7 @@ export function ContactSection() {
                 {/* Name Field */}
                 <div>
                   <label htmlFor="name" className="block text-gray-300 text-sm mb-2">
-                     Name / Name of Company <span className="text-[#d4a574]">*</span>
+                     {t('contact.nameLabel')} <span className="text-[#d4a574]">*</span>
                   </label>
                   <input
                     type="text"
@@ -375,7 +377,7 @@ export function ContactSection() {
                     className={`w-full px-4 py-3 bg-zinc-900/50 border ${
                       errors.name ? 'border-red-500' : 'border-[#d4a574]/20'
                     } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] transition-colors`}
-                    placeholder="Name / Name of Company"
+                    placeholder={t('contact.namePlaceholder')}
                   />
                   {errors.name && (
                     <p className="text-red-500 text-xs mt-1">{errors.name}</p>
@@ -385,7 +387,7 @@ export function ContactSection() {
                 {/* Email Field */}
                 <div>
                   <label htmlFor="email" className="block text-gray-300 text-sm mb-2">
-                    Email Address <span className="text-[#d4a574]">*</span>
+                    {t('contact.emailLabel')} <span className="text-[#d4a574]">*</span>
                   </label>
                   <input
                     type="email"
@@ -396,7 +398,7 @@ export function ContactSection() {
                     className={`w-full px-4 py-3 bg-zinc-900/50 border ${
                       errors.email ? 'border-red-500' : 'border-[#d4a574]/20'
                     } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] transition-colors`}
-                    placeholder="Email Address"
+                    placeholder={t('contact.emailPlaceholder')}
                   />
                   {errors.email && (
                     <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -407,7 +409,7 @@ export function ContactSection() {
               {/* Phone Field */}
               <div>
                 <label htmlFor="phone" className="block text-gray-300 text-sm mb-2">
-                  Phone Number <span className="text-gray-500 text-xs">(Optional)</span>
+                  {t('contact.phoneLabel')} <span className="text-gray-500 text-xs">({t('contact.optional')})</span>
                 </label>
                 <input
                   type="tel"
@@ -418,7 +420,7 @@ export function ContactSection() {
                   className={`w-full px-4 py-3 bg-zinc-900/50 border ${
                     errors.phone ? 'border-red-500' : 'border-[#d4a574]/20'
                   } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] transition-colors`}
-                  placeholder="Phone Number"
+                  placeholder={t('contact.phonePlaceholder')}
                 />
                 {errors.phone && (
                   <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
@@ -431,7 +433,7 @@ export function ContactSection() {
                 <div>
                   <label htmlFor="eventDate" className="block text-gray-300 text-sm mb-2">
                     <Calendar size={14} className="inline mr-1" />
-                    Event Date <span className="text-[#d4a574]">*</span>
+                    {t('contact.eventDate')} <span className="text-[#d4a574]">*</span>
                   </label>
                   <input
                     type="date"
@@ -453,7 +455,7 @@ export function ContactSection() {
                 <div>
                   <label htmlFor="guestCount" className="block text-gray-300 text-sm mb-2">
                     <UsersIcon size={14} className="inline mr-1" />
-                    Number of Guests <span className="text-[#d4a574]">*</span>
+                    {t('contact.numberOfGuests')} <span className="text-[#d4a574]">*</span>
                   </label>
                   <select
                     id="guestCount"
@@ -466,7 +468,7 @@ export function ContactSection() {
                   >
                     {guestRanges.map((range) => (
                       <option key={range.value} value={range.value}>
-                        {range.label}
+                        {t(range.labelKey)}
                       </option>
                     ))}
                   </select>
@@ -479,7 +481,7 @@ export function ContactSection() {
               {/* Event Type */}
               <div>
                 <label htmlFor="eventType" className="block text-gray-300 text-sm mb-2">
-                  Event Type <span className="text-[#d4a574]">*</span>
+                  {t('contact.eventType')} <span className="text-[#d4a574]">*</span>
                 </label>
                 <select
                   id="eventType"
@@ -492,7 +494,7 @@ export function ContactSection() {
                 >
                   {eventTypes.map((type) => (
                     <option key={type.value} value={type.value}>
-                      {type.label}
+                      {t(type.labelKey)}
                     </option>
                   ))}
                 </select>
@@ -504,25 +506,25 @@ export function ContactSection() {
               {/* Service Interest */}
               <div>
                 <label className="block text-gray-300 text-sm mb-3">
-                  Services Interested In <span className="text-[#d4a574]">*</span>
+                  {t('contact.servicesInterested')} <span className="text-[#d4a574]">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   {services.map((service) => (
                     <label
-                      key={service}
+                      key={service.value}
                       className={`flex items-center gap-2 p-3 border ${
-                        formData.serviceInterest.includes(service)
+                        formData.serviceInterest.includes(service.value)
                           ? 'border-[#d4a574] bg-[#d4a574]/10'
                           : 'border-[#d4a574]/20'
                       } rounded-lg cursor-pointer hover:border-[#d4a574] transition-colors`}
                     >
                       <input
                         type="checkbox"
-                        checked={formData.serviceInterest.includes(service)}
-                        onChange={() => handleServiceToggle(service)}
+                        checked={formData.serviceInterest.includes(service.value)}
+                        onChange={() => handleServiceToggle(service.value)}
                         className="w-4 h-4 accent-[#d4a574]"
                       />
-                      <span className="text-gray-300 text-sm">{service}</span>
+                      <span className="text-gray-300 text-sm">{t(service.labelKey)}</span>
                     </label>
                   ))}
                 </div>
@@ -534,7 +536,7 @@ export function ContactSection() {
               {/* Subject Field */}
               <div>
                 <label htmlFor="subject" className="block text-gray-300 text-sm mb-2">
-                  Subject <span className="text-[#d4a574]">*</span>
+                  {t('contact.subject')} <span className="text-[#d4a574]">*</span>
                 </label>
                 <input
                   type="text"
@@ -545,7 +547,7 @@ export function ContactSection() {
                   className={`w-full px-4 py-3 bg-zinc-900/50 border ${
                     errors.subject ? 'border-red-500' : 'border-[#d4a574]/20'
                   } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] transition-colors`}
-                  placeholder="Event Inquiry"
+                  placeholder={t('contact.subjectPlaceholder')}
                 />
                 {errors.subject && (
                   <p className="text-red-500 text-xs mt-1">{errors.subject}</p>
@@ -555,7 +557,7 @@ export function ContactSection() {
               {/* Message Field */}
               <div>
                 <label htmlFor="message" className="block text-gray-300 text-sm mb-2">
-                  Message <span className="text-[#d4a574]">*</span>
+                  {t('contact.message')} <span className="text-[#d4a574]">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -566,7 +568,7 @@ export function ContactSection() {
                   className={`w-full px-4 py-3 bg-zinc-900/50 border ${
                     errors.message ? 'border-red-500' : 'border-[#d4a574]/20'
                   } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] transition-colors resize-none`}
-                  placeholder="Tell us about your event, special requirements, or any questions you may have..."
+                  placeholder={t('contact.messagePlaceholder')}
                 />
                 {errors.message && (
                   <p className="text-red-500 text-xs mt-1">{errors.message}</p>
@@ -582,11 +584,11 @@ export function ContactSection() {
                 {isSubmitting ? (
                   <>
                     <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
-                    Sending...
+                    {t('contact.sending')}
                   </>
                 ) : (
                   <>
-                    Send Message
+                    {t('contact.sendMessage')}
                     <Send size={16} />
                   </>
                 )}

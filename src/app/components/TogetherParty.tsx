@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "../components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export default function PartyEventsSection() {
+  const { t } = useTranslation();
+  
   return (
     <section className="bg-black py-20 md:py-28 relative overflow-hidden">
       {/* Background Image with Overlay */}
@@ -20,18 +23,15 @@ export default function PartyEventsSection() {
           className="text-3xl md:text-4xl lg:text-5xl text-white font-light mb-6 leading-tight"
           style={{ fontFamily: "'Georgia', serif" }}
         >
-          Make An Unforgettable
-          <br />
-          Party Together
+          {t('makeParty.title')}
         </h2>
 
         <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-          Let us bring the art of mixology to your special event. From intimate gatherings to grand celebrations, 
-          we create memorable experiences with expertly crafted cocktails and professional service.
+          {t('makeParty.description')}
         </p>
 
         <Button className="bg-transparent border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 px-10 py-6 text-xs tracking-[0.2em] rounded-sm">
-          Contact Us
+          {t('makeParty.cta')}
         </Button>
 
         

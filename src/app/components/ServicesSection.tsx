@@ -1,5 +1,6 @@
 import { Martini, Users, Music, UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 interface Service {
   id: number;
@@ -15,6 +16,8 @@ interface ServicesSectionProps {
 }
 
 export function ServicesSection({ services }: ServicesSectionProps) {
+  const { t } = useTranslation();
+  
   // Map service titles to slugs
   const getServiceSlug = (title: string) => {
     const slugMap: Record<string, string> = {
@@ -32,10 +35,10 @@ export function ServicesSection({ services }: ServicesSectionProps) {
         {/* Section Title */}
         <div className="text-center mb-12 lg:mb-16">
           <h2 className="text-2xl lg:text-3xl text-white tracking-[0.3em] mb-4">
-            OUR SERVICES
+            {t('services.title')}
           </h2>
           <p className="text-gray-400 text-sm lg:text-base max-w-2xl mx-auto">
-            We offer a comprehensive range of premium bar and event services to make your celebration unforgettable
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -73,7 +76,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                     {service.description}
                   </p>
                   <div className="inline-flex items-center gap-2 text-[#d4a574] text-sm group-hover:gap-3 transition-all">
-                    Learn More
+                    {t('services.learnMore')}
                     <ArrowRight size={14} />
                   </div>
                 </div>

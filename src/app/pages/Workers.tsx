@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router';
+import { useTranslation } from 'react-i18next';
 import { StructuredData, breadcrumbSchema } from '../components/StructuredData';
 import RohitImage from '../Image/PHOTO-2026-02-10-00-47-20.jpg';
 import GeorgeImage from '../Image/IMG_0807 - Edited.jpg';
@@ -8,17 +9,17 @@ import GeorgeImage from '../Image/IMG_0807 - Edited.jpg';
 
 interface TeamMember {
   id: string;
-  name: string;
-  role: string;
-  title: string;
+  nameKey: string;
+  roleKey: string;
+  titleKey: string;
   image: string;
-  bio: string;
+  bioKey: string;
   email: string;
   phone: string;
   linkedin?: string;
   experience: {
     years: number;
-    description: string;
+    descriptionKey: string;
   };
  
 }
@@ -26,38 +27,40 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: '1',
-    name: 'George Alsag',
-    role: 'Founder',
-    title: 'Visionary Leader',
+    nameKey: 'workers.george.name',
+    roleKey: 'workers.george.role',
+    titleKey: 'workers.george.title',
     image: GeorgeImage,
-    bio: 'George founded EventRulres in 2026 with a vision to revolutionize the event staffing industry. With over 7 years of experience in hospitality management and event coordination, he recognized the need for a premium staffing agency that prioritizes both client satisfaction and worker welfare. Under his leadership, EventRulres has grown from a small local operation to one of the most trusted names in event staffing across the region.',
+    bioKey: 'workers.george.bio',
     email: 'george@vipstaffing.com',
     phone: '+1 (555) 123-4567',
     linkedin: 'https://linkedin.com/in/georgealsag',
     experience: {
       years: 7,
-      description: 'Over 7 years of experience in hospitality management, event coordination, and staffing operations. Previously served as Director of Operations at luxury hotels and event venues.'
+      descriptionKey: 'workers.george.experience'
     },
   },
 
   {
     id: '2',
-    name: 'Rohit Joshi',
-    role: 'Co-Founder',
-    title: 'Operations Specialist',
+    nameKey: 'workers.rohit.name',
+    roleKey: 'workers.rohit.role',
+    titleKey: 'workers.rohit.title',
     image: RohitImage,
-    bio: 'Rohit co-founded EventRulres alongside George, bringing his extensive background in operations management and human resources. With a passion for creating efficient systems and nurturing talent, he oversees all day-to-day operations, staff training, and quality assurance. His commitment to excellence ensures that every staff member represents the EventRulres brand with professionalism and expertise.',
+    bioKey: 'workers.rohit.bio',
     email: 'rohit@vipstaffing.com',
     phone: '+1 (555) 123-4568',
     linkedin: 'https://linkedin.com/in/joshi',
     experience: {
       years: 8,
-      description: '8 years of experience in operations management, human resources, and training development. Previously managed large-scale hospitality operations for Fortune 500 companies.'
+      descriptionKey: 'workers.rohit.experience'
     },
   }
 ];
 
 export function Workers() {
+  const { t } = useTranslation();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -69,8 +72,8 @@ export function Workers() {
     name: 'EventRulres',
     employee: teamMembers.map(member => ({
       '@type': 'Person',
-      name: member.name,
-      jobTitle: member.role,
+      name: t(member.nameKey),
+      jobTitle: t(member.roleKey),
       email: member.email,
       telephone: member.phone,
       worksFor: {
@@ -85,8 +88,8 @@ export function Workers() {
       
       <StructuredData data={teamSchema} />
       <StructuredData data={breadcrumbSchema([
-        { name: 'Home', url: '/' },
-        { name: 'Our Team', url: '/workers' }
+        { name: t('nav.home'), url: '/' },
+        { name: t('workers.breadcrumb'), url: '/workers' }
       ])} />
 
       {/* Hero Section */}
@@ -94,10 +97,10 @@ export function Workers() {
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center max-w-4xl mx-auto space-y-6">
             <h1 className="text-5xl lg:text-6xl xl:text-7xl text-white tracking-tight leading-tight">
-              Meet Our Leadership Team
+              {t('workers.heroTitle')}
             </h1>
             <p className="text-gray-400 text-lg lg:text-xl leading-relaxed">
-              The visionaries behind VIP Staffing, committed to excellence in event staffing and exceptional service delivery
+              {t('workers.heroSubtitle')}
             </p>
           </div>
         </div>
@@ -116,7 +119,7 @@ export function Workers() {
                   <div className="aspect-[3/4] overflow-hidden rounded-lg">
                     <img
                       src={member.image}
-                      alt={member.name}
+                      alt={t(member.nameKey)}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -127,15 +130,15 @@ export function Workers() {
               <div className={`space-y-8 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                 <div>
                   <div className="inline-block px-4 py-1 bg-[#d4a574]/20 border border-[#d4a574] rounded-full text-[#d4a574] text-sm mb-4">
-                    {member.title}
+                    {t(member.titleKey)}
                   </div>
-                  <h2 className="text-4xl lg:text-5xl text-white mb-2">{member.name}</h2>
-                  <p className="text-xl text-[#d4a574]">{member.role}</p>
+                  <h2 className="text-4xl lg:text-5xl text-white mb-2">{t(member.nameKey)}</h2>
+                  <p className="text-xl text-[#d4a574]">{t(member.roleKey)}</p>
                 </div>
 
                 <div className="space-y-4">
                   <p className="text-gray-300 leading-relaxed text-lg">
-                    {member.bio}
+                    {t(member.bioKey)}
                   </p>
                 </div>
               </div>

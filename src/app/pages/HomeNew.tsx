@@ -8,11 +8,12 @@ import AboutSection from '../components/AboutSection';
 import TeamSection from '../components/TeamSection';
 import { ContactSection } from '../components/ContactSection';
 import { motion } from "framer-motion";
-import PrivateEventsSection from '../components/PrivateEventsSection';
+import { useTranslation } from 'react-i18next';
 
 export function HomeNew() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 3;
+  const { t } = useTranslation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,7 +69,7 @@ export function HomeNew() {
 
               {/* Subtitle */}
               <p className="text-white text-base sm:text-lg lg:text-2xl font-light">
-                Für <span className="font-semibold">Messen</span>, private <span className="font-semibold">Events</span>, sowie <span className="font-semibold">Firmen- und Weihnachtsfeiern</span>
+                {t('hero.description')}
               </p>
 
               {/* CTA Button */}
@@ -76,7 +77,7 @@ export function HomeNew() {
                 href="#ContactSection"
                 className="inline-block border border-[#C9A84C] text-[#C9A84C] px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm tracking-[0.15em] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 rounded-sm"
               >
-                JETZT KOSTENLOSES ANGEBOT ANFRAGEN
+                {t('hero.cta')}
               </a>
             </div>
           </div>
@@ -90,9 +91,9 @@ export function HomeNew() {
           <div className="w-full max-w-6xl px-4 sm:px-6 lg:px-12">
             
             <div className="text-center mb-10 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4 tracking-wide">Our Services</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4 tracking-wide">{t('services.title')}</h2>
               <p className="text-gray-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
-                Discover our comprehensive range of luxury bar and event services designed to make your celebration unforgettable
+                {t('services.subtitle')}
               </p>
             </div>
 
@@ -115,11 +116,11 @@ export function HomeNew() {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
                     <Martini size={20} />
                   </div>
-                  <h3 className="text-lg sm:text-xl text-white group-hover:text-[#d4a574] transition-colors">Bar Staff Placement</h3>
+                  <h3 className="text-lg sm:text-xl text-white group-hover:text-[#d4a574] transition-colors">{t('home.barStaffPlacement')}</h3>
                   <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Professional bartenders ready to work at your venue or event
+                    {t('home.barStaffPlacementDesc')}
                   </p>
-                  <div className="mt-auto text-[#d4a574] text-sm sm:text-base">Learn More →</div>
+                  <div className="mt-auto text-[#d4a574] text-sm sm:text-base">{t('services.learnMore')} →</div>
                 </div>
               </Link>
 
@@ -140,11 +141,11 @@ export function HomeNew() {
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#d4a574]/20 border border-[#d4a574] flex items-center justify-center text-[#d4a574]">
                     <Users size={20} />
                   </div>
-                  <h3 className="text-lg sm:text-xl text-white group-hover:text-[#d4a574] transition-colors">Event Service Staff</h3>
+                  <h3 className="text-lg sm:text-xl text-white group-hover:text-[#d4a574] transition-colors">{t('home.eventServiceStaff')}</h3>
                   <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                    Trained service personnel for events, parties, and special occasions
+                    {t('home.eventServiceStaffDesc')}
                   </p>
-                  <div className="mt-auto text-[#d4a574] text-sm sm:text-base">Learn More →</div>
+                  <div className="mt-auto text-[#d4a574] text-sm sm:text-base">{t('services.learnMore')} →</div>
                 </div>
               </Link>
 

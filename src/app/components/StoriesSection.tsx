@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Story {
   id: number;
@@ -13,12 +14,14 @@ interface StoriesSectionProps {
 }
 
 export function StoriesSection({ stories, featuredImage }: StoriesSectionProps) {
+  const { t } = useTranslation();
+  
   return (
     <section className="bg-black py-16 lg:py-24">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Title */}
         <h2 className="text-center text-2xl lg:text-3xl text-white tracking-[0.3em] mb-12 lg:mb-16">
-          STORIES
+          {t('stories.title')}
         </h2>
 
         {/* Desktop Layout */}
@@ -57,7 +60,7 @@ export function StoriesSection({ stories, featuredImage }: StoriesSectionProps) 
                     href="/blog"
                     className="inline-flex items-center gap-2 text-[#d4a574] text-sm hover:gap-3 transition-all"
                   >
-                    Read More
+                    {t('stories.readMore')}
                     <ArrowRight size={14} />
                   </a>
                 </div>
@@ -101,7 +104,7 @@ export function StoriesSection({ stories, featuredImage }: StoriesSectionProps) 
                 href="/blog"
                 className="inline-flex items-center gap-2 text-[#d4a574] text-sm hover:gap-3 transition-all"
               >
-                Read More
+                {t('stories.readMore')}
                 <ArrowRight size={14} />
               </a>
             </div>

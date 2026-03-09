@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function AboutSection() {
+  const { t } = useTranslation();
+  
   return (
     <section id="about" className="bg-black py-20 md:py-28">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
@@ -47,22 +50,17 @@ export default function AboutSection() {
                 className="text-2xl md:text-3xl text-white tracking-[0.15em] font-light mb-4"
                 style={{ fontFamily: "'Georgia', serif" }}
               >
-                ABOUT US
+                {t('about.title')}
               </h2>
               <div className="w-12 h-[1px] bg-[#C9A84C]" />
             </div>
 
             <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-light">
-              Top Level Bartending is a premium mobile bartending service dedicated to bringing 
-              exceptional cocktail experiences to your events. With years of expertise in mixology 
-              and event services, we pride ourselves on delivering professional, sophisticated, and 
-              memorable beverage solutions.
+              {t('about.description1')}
             </p>
 
             <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 font-light">
-              Our team of skilled bartenders combines passion, creativity, and precision to craft 
-              signature cocktails that perfectly complement your occasion. Whether it's an intimate 
-              gathering or a grand celebration, we ensure every detail exceeds your expectations.
+              {t('about.description2')}
             </p>
        
           </div>
@@ -71,3 +69,6 @@ export default function AboutSection() {
     </section>
   );
 }
+'Bartending brings professional craft cocktail experience to your corporate events, private parties, and special occasions. Fully licensed. Unforgettable service.';
+
+ 'Our team of skilled bartenders combines passion, creativity, and precision to craft signature cocktails that perfectly complement your occasion. Whether it\'s an intimate gathering or a grand celebration, we ensure every detail exceeds your expectations.';
