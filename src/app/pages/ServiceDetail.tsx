@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Video1 from '../Video/VIDEO-2026-02-10-00-45-16 2.mp4';
+import Video3 from '../Video/1bd4d7f6e87142558c9a565dda6f29fc.mp4';
 
 export function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -109,6 +111,42 @@ export function ServiceDetail() {
             <p className="text-gray-300 text-lg leading-relaxed">
               {t(service.detailedDescriptionKey)}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Showcase */}
+      <section className="py-16 lg:py-24 bg-zinc-900/30">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-6xl mx-auto">
+           
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+              <div className="relative rounded-xl overflow-hidden w-[50rem] bg-black aspect-video">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src={Video1} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              
+              <div className="relative rounded-xl overflow-hidden w-[40rem] bg-black aspect-video">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src={Video3} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
           </div>
         </div>
       </section>

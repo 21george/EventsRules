@@ -139,6 +139,7 @@ export const de = {
     contactUsToday: 'Kontaktieren Sie uns noch heute, um Ihre Veranstaltung zu besprechen und ein individuelles Angebot für unseren {{service}}-Service zu erhalten.',
     callUsNow: 'Jetzt anrufen',
     sendEmail: 'E-Mail senden',
+    seeUsInAction: 'Sehen Sie uns in Aktion',
   },
   workers: {
     breadcrumb: 'Unser Team',

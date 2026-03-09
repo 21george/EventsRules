@@ -139,6 +139,7 @@ export const en = {
     contactUsToday: 'Contact us today to discuss your event and receive a custom quote for our {{service}} service.',
     callUsNow: 'Call Us Now',
     sendEmail: 'Send Email',
+    seeUsInAction: 'See Us in Action',
   },
   workers: {
     breadcrumb: 'Our Team',

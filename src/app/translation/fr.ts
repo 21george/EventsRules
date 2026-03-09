@@ -139,6 +139,7 @@ export const fr = {
     contactUsToday: 'Contactez-nous aujourd\'hui pour discuter de votre événement et recevoir un devis personnalisé pour notre service {{service}}.',
     callUsNow: 'Appelez maintenant',
     sendEmail: 'Envoyer un e-mail',
+    seeUsInAction: 'Voyez-nous en action',
   },
   workers: {
     breadcrumb: 'Notre Équipe',
