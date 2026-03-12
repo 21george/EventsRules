@@ -1,9 +1,13 @@
 import React from "react";
 import { Button } from "../components/ui/button";
 import { useTranslation } from "react-i18next";
+import { Mail, Phone } from "lucide-react";
 
 export default function PartyEventsSection() {
   const { t } = useTranslation();
+
+
+   
   
   return (
     <section className="bg-black py-20 md:py-28 relative overflow-hidden">
@@ -29,12 +33,23 @@ export default function PartyEventsSection() {
         <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto mb-10 font-light leading-relaxed">
           {t('makeParty.description')}
         </p>
-
-        <Button className="bg-transparent border border-[#C9A84C] text-[#C9A84C] hover:bg-[#C9A84C] hover:text-black transition-all duration-500 px-10 py-6 text-xs tracking-[0.2em] rounded-sm">
-          {t('makeParty.cta')}
-        </Button>
-
-        
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="tel:+41 556301 2884"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#d4a574] text-black rounded-full hover:bg-[#c49564] transition-all duration-300"
+              >
+                <Phone size={20} />
+                {t('serviceDetail.callUsNow')}
+              </a>
+              <a
+                href="mailto:info@eventsrules.com"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 border border-[#d4a574] text-[#d4a574] rounded-full hover:bg-[#d4a574] hover:text-black transition-all duration-300"
+              >
+                <Mail size={20} />
+                {t('serviceDetail.sendEmail')}
+              </a>
+            </div>
+         
       </div>
     </section>
   );
